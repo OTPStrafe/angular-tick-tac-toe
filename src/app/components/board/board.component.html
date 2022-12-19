@@ -1,0 +1,10 @@
+<div class="game-board">
+  <p class="box" *ngFor="let p of board; index as i" (click)="onClick(i)">{{p === 1 ? "X" : p === 2 ? "O" : ""}}</p>
+</div>
+
+<div *ngIf="winningPlayer !== 0; then thenBlock else elseBlock"></div>
+<ng-template #elseBlock><app-message [message]="isPlayerTurn ? 'Es tu turno ( X )' : 'Es turno de tu rival ( O )'"></app-message></ng-template>
+<ng-template #thenBlock>
+  <app-message [message]="winningPlayer === 1 ? 'Ganaste' : 'Perdiste'"></app-message>
+  <button (click)="restartGame()" class="reset">Volver a jugar</button>
+</ng-template>
